@@ -15,6 +15,9 @@
 		15E1E2C22B51AFBE00C1892E /* PhotoKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E1E2C12B51AFBE00C1892E /* PhotoKitTests.swift */; };
 		15E1E2CC2B51AFBE00C1892E /* PhotoKitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E1E2CB2B51AFBE00C1892E /* PhotoKitUITests.swift */; };
 		15E1E2CE2B51AFBE00C1892E /* PhotoKitUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E1E2CD2B51AFBE00C1892E /* PhotoKitUITestsLaunchTests.swift */; };
+		15E1E2DB2B56D77800C1892E /* CompassPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E1E2DA2B56D77800C1892E /* CompassPage.swift */; };
+		15E1E2DE2B56DA6700C1892E /* Solar in Frameworks */ = {isa = PBXBuildFile; productRef = 15E1E2DD2B56DA6700C1892E /* Solar */; };
+		15E1E2E02B56DBF300C1892E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E1E2DF2B56DBF300C1892E /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +49,9 @@
 		15E1E2C72B51AFBE00C1892E /* PhotoKitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoKitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15E1E2CB2B51AFBE00C1892E /* PhotoKitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoKitUITests.swift; sourceTree = "<group>"; };
 		15E1E2CD2B51AFBE00C1892E /* PhotoKitUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoKitUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		15E1E2DA2B56D77800C1892E /* CompassPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassPage.swift; sourceTree = "<group>"; };
+		15E1E2DF2B56DBF300C1892E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		15E1E2E12B56DD8700C1892E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15E1E2DE2B56DA6700C1892E /* Solar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,11 +103,14 @@
 		15E1E2AD2B51AFBD00C1892E /* PhotoKit */ = {
 			isa = PBXGroup;
 			children = (
+				15E1E2E12B56DD8700C1892E /* Info.plist */,
 				15E1E2AE2B51AFBD00C1892E /* PhotoKitApp.swift */,
 				15E1E2B02B51AFBD00C1892E /* ContentView.swift */,
 				15E1E2B22B51AFBD00C1892E /* Item.swift */,
 				15E1E2B42B51AFBE00C1892E /* Assets.xcassets */,
 				15E1E2B62B51AFBE00C1892E /* Preview Content */,
+				15E1E2DA2B56D77800C1892E /* CompassPage.swift */,
+				15E1E2DF2B56DBF300C1892E /* LocationManager.swift */,
 			);
 			path = PhotoKit;
 			sourceTree = "<group>";
@@ -146,6 +156,9 @@
 			dependencies = (
 			);
 			name = PhotoKit;
+			packageProductDependencies = (
+				15E1E2DD2B56DA6700C1892E /* Solar */,
+			);
 			productName = PhotoKit;
 			productReference = 15E1E2AB2B51AFBD00C1892E /* PhotoKit.app */;
 			productType = "com.apple.product-type.application";
@@ -218,6 +231,9 @@
 				Base,
 			);
 			mainGroup = 15E1E2A22B51AFBD00C1892E;
+			packageReferences = (
+				15E1E2DC2B56DA6700C1892E /* XCRemoteSwiftPackageReference "Solar" */,
+			);
 			productRefGroup = 15E1E2AC2B51AFBD00C1892E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -262,7 +278,9 @@
 			files = (
 				15E1E2B12B51AFBD00C1892E /* ContentView.swift in Sources */,
 				15E1E2B32B51AFBD00C1892E /* Item.swift in Sources */,
+				15E1E2E02B56DBF300C1892E /* LocationManager.swift in Sources */,
 				15E1E2AF2B51AFBD00C1892E /* PhotoKitApp.swift in Sources */,
+				15E1E2DB2B56D77800C1892E /* CompassPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +447,8 @@
 				DEVELOPMENT_TEAM = PZWB43AU2U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PhotoKit/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to calculate sunrise and sunset times";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -441,9 +461,14 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = BinhDoCao.PhotoKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SLocationWhenInUseUsageDescription = "We need your location to calculate sunrise and sunset times";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -458,6 +483,8 @@
 				DEVELOPMENT_TEAM = PZWB43AU2U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PhotoKit/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to calculate sunrise and sunset times";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -470,9 +497,14 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = BinhDoCao.PhotoKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SLocationWhenInUseUsageDescription = "We need your location to calculate sunrise and sunset times";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -592,6 +624,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		15E1E2DC2B56DA6700C1892E /* XCRemoteSwiftPackageReference "Solar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ceeK/Solar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		15E1E2DD2B56DA6700C1892E /* Solar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 15E1E2DC2B56DA6700C1892E /* XCRemoteSwiftPackageReference "Solar" */;
+			productName = Solar;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 15E1E2A32B51AFBD00C1892E /* Project object */;
 }

@@ -5,55 +5,55 @@
 //  Created by Binh Do-Cao on 1/12/24.
 //
 
-import SwiftUI
 import SwiftData
 
+import SwiftUI
+import CoreLocation
+import Solar
+
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+	@StateObject private var locationManager = LocationManager()
+	@State private var sunrise: Date?
+	@State private var sunset: Date?
 
-    var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
-        }
-    }
+	var body: some View {
+		VStack {
+			if let sunrise = sunrise, let sunset = sunset {
+				VStack {
+					Text("Sunrise: \(sunrise, formatter: Self.dateFormatter)")
+						.padding()
+						.background(Color.yellow)
+						.cornerRadius(10)
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
+					Text("Sunset: \(sunset, formatter: Self.dateFormatter)")
+						.padding()
+						.background(Color.orange)
+						.cornerRadius(10)
+				}
+			} else {
+				Text("Calculating sunrise and sunset times...")
+			}
+		}
+		.onReceive(locationManager.$location) { location in
+			calculateSunTimes(location: location)
+		}
+	}
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
-    }
+	private static let dateFormatter: DateFormatter = {
+		let formatter = DateFormatter()
+		formatter.dateStyle = .none
+		formatter.timeStyle = .medium
+		return formatter
+	}()
+
+	private func calculateSunTimes(location: CLLocation?) {
+		guard let location = location else { return }
+		let solar = Solar(for: Date(), coordinate: location.coordinate)
+		sunrise = solar?.sunrise
+		sunset = solar?.sunset
+	}
 }
+
 
 #Preview {
     ContentView()
